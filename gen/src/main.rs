@@ -240,6 +240,11 @@ fn main() {
     }
 
     writeln!(cargo_toml, "default = [{}]", DEFAULT_FEATURES).unwrap();
+    writeln!(cargo_toml).unwrap();
+    writeln!(cargo_toml, "# Internal feature, only used when building as part of libstd, not part of the").unwrap();
+    writeln!(cargo_toml, "# stable interface of this crate.").unwrap();
+    writeln!(cargo_toml, "rustc-dep-of-std = ['core', 'compiler_builtins', 'libc', 'libc/rustc-dep-of-std']").unwrap();
+
 
     // Reset the `linux` directory back to the original branch.
     git_checkout(LINUX_VERSIONS[0]);

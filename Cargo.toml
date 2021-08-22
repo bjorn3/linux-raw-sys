@@ -18,6 +18,11 @@ targets = ["x86_64-unknown-linux-gnu", "i686-unknown-linux-gnu"]
 [dependencies]
 libc = { version = "0.2.98", optional = true }
 
+# Internal feature, only used when building as part of libstd, not part of the
+# stable interface of this crate.
+core = { version = '1.0.0', optional = true, package = 'rustc-std-workspace-core' }
+compiler_builtins = { version = '0.1.2', optional = true }
+
 # The rest of this file is auto-generated!
 [features]
 v2_6_32 = []
@@ -32,3 +37,7 @@ v4_20 = []
 v5_4 = []
 v5_11 = []
 default = ["general", "errno"]
+
+# Internal feature, only used when building as part of libstd, not part of the
+# stable interface of this crate.
+rustc-dep-of-std = ['core', 'compiler_builtins', 'libc', 'libc/rustc-dep-of-std']
